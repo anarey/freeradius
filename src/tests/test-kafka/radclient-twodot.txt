@@ -1,0 +1,12 @@
+        Acct-Session-Id = "6000006B"
+        Calling-Station-Id = 10:20:30:40:50:60
+        User-Name = "testing"
+        NAS-IP-Address = 127.0.0.1
+        NAS-Port-Id = 32
+        NAS-Port-Type = Async
+        Acct-Status-Type = Start
+        Connect-Info = "46000 LAPM/V42BIS"
+        Service-Type = Framed-User
+        Framed-Protocol = PPP
+        Framed-IP-Address = 192.168.5.66
+        Acct-Delay-Time = 0
