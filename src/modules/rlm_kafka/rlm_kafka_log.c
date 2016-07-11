@@ -198,24 +198,23 @@ static int64_t number_mac_partitioner(const void *const_keydata,
 }
 
 static int64_t mac_partitioner0 (const void *keydata,size_t keylen) {
-	switch(keylen) {
-		/* case strlen(00-00-00-00-00-00): */
-		case strlen("00:00:00:00:00:00"):
-			return colon_hypen_mac_partitioner0(keydata,keylen,
-								6 /*toks */);
 
-		case strlen("000000-000000"):
-			return colon_hypen_mac_partitioner0(keydata,keylen,
-								2 /*toks */);
+	if (keylen == strlen("00:00:00:00:00:00")) {
+		return colon_hypen_mac_partitioner0(keydata,keylen, 6/*toks */);
+	}
 
-		case strlen("000000000000"):
-			return number_mac_partitioner(keydata,keylen);
+	if (keylen == strlen("000000-000000")) {
+		return colon_hypen_mac_partitioner0(keydata,keylen,
+						    2 /*toks */);
+	}
 
-		default:
-			radlog(L_ERR,"Invalid mac %.*s len",(int)keylen,
-							(const char *)keydata);
-			return -1;
-	};
+	if (keylen == strlen("000000000000")) {
+		return number_mac_partitioner(keydata,keylen);
+	} else {
+		radlog(L_ERR,"Invalid mac %.*s len",(int)keylen,
+		       (const char *)keydata);
+		return -1;
+	}
 }
 
 static int32_t mac_partitioner (const rd_kafka_topic_t *rkt,
