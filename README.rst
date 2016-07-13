@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/anarey/freeradius.svg?branch=test-kafka)](https://travis-ci.org/anarey/freeradius/)
+
 The FreeRADIUS server
 =====================
 |BuildStatus|_

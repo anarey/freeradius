@@ -1,10 +1,51 @@
+sudo: required
+
 language: c
-compiler:
-  - clang
-  - gcc
+
+notifications:
+  email: false
+
+branches:
+  only:
+    - test-kafka
+
+services:
+  - docker
+
+env:
+  DOCKER_COMPOSE_VERSION:  1.7.1
+
 before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install -qq libtalloc-dev libssl-dev
-  - sudo apt-get install -qq -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" libmysqlclient-dev
-  - sudo apt-get install -qq libkrb5-dev libgdbm-dev libhiredis-dev libldap2-dev libpam0g-dev libpcap-dev libperl-dev libpq-dev libreadline-dev firebird-dev freetds-dev python-dev ruby-dev unixodbc-dev
-script: ./configure -C --with-udpfromto --with-dhcp --with-vmps && make -j8 && make test
+# Use docker 1.11
+  - sudo sh -c 'echo "deb https://apt.dockerproject.org/repo ubuntu-precise main" > /etc/apt/sources.list.d/docker.list'
+  - sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+  - sudo apt-get update
+  - sudo apt-key update
+  - sudo apt-get -qqy -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install docker-engine=1.11.1-0~precise
+
+# Use docker-compose 1.7.1
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+
+install: true
+
+script:
+  - docker-compose up --build -d
+
+  - docker run -v $(pwd):/app anarey/freeradius-test
+
+  - docker run -v $(pwd):/app anarey/freeradius-test ./configure --prefix="/app"
+  - docker run -v $(pwd):/app anarey/freeradius-test make
+  - docker run -v $(pwd):/app anarey/freeradius-test make install
+
+# Run a script to generate certs file
+  - docker run -v $(pwd):/app anarey/freeradius-test /bin/sh /app/raddb/certs/bootstrap
+
+# Join freeradius container into freeradius_kafkanet
+  - docker run -v $(pwd):/app --net freeradius_kafkanet anarey/freeradius-test /bin/sh src/tests/test-kafka/test4.sh
+#  - docker network inspect freeradius_kafkanet
+#  - docker-compose --verbose ps
+#  - docker-compose ps
+#  - docker network inspect freeradius_kafkanet
+#  - docker network ls
