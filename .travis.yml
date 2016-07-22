@@ -43,7 +43,7 @@ script:
   - docker run -v $(pwd):/app anarey/freeradius-test /bin/sh /app/raddb/certs/bootstrap
 
 # Join freeradius container into freeradius_kafkanet
-  - docker run -v $(pwd):/app --net freeradius_kafkanet anarey/freeradius-test /bin/sh src/tests/test-kafka/test4.sh
+  - docker run -v $(pwd):/app --net freeradius_kafkanet anarey/freeradius-test /bin/sh src/tests/test-kafka/run-test.sh
 #  - docker network inspect freeradius_kafkanet
 #  - docker-compose --verbose ps
 #  - docker-compose ps
