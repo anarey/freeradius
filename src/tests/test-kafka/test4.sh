@@ -116,5 +116,7 @@ find / -name callgrind.out.final
 echo cat callgrind.out.final
 cat callgrind.out.final
 
+echo "----- cat "
+cat /callgrind/callgrind_coverage/callgrind.out.4.final
 
 
