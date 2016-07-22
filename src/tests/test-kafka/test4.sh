@@ -102,11 +102,11 @@ $PYCHECKJSON -t $FREERADIUS_PATH_TEST$JSON_CHECK_TEMPLATE -j $JSON_OUT$DEBUG
 
 ## Coverage system:
 
-#CALLGRIND_PATH="/app/callgrind_tools/callgrind_coverage/cg_coverage"
-#CALLGRIND_OUT="callgrind-out-4.log"
-#$CALLGRIND_PATH callgrind.out.final $HOME"/src/modules/rlm_kafka/rlm_kafka_log.c" > $CALLGRIND_OUT
-#echo "==============================================="
-#echo $CALLGRIND_PATH callgrind.out.final $HOME"/src/modules/rlm_kafka/rlm_kafka_log.c"
-#echo "==============================================="
-#echo "Callgrind file: " $CALLGRIND_OUT
+CALLGRIND_PATH="/callgrind/callgrind_coverage/cg_coverage"
+CALLGRIND_OUT="callgrind-out-4.log"
+$CALLGRIND_PATH callgrind.out.final $HOME"/src/modules/rlm_kafka/rlm_kafka_log.c" > $CALLGRIND_OUT
+echo "==============================================="
+echo $CALLGRIND_PATH callgrind.out.final $HOME"/src/modules/rlm_kafka/rlm_kafka_log.c"
+echo "==============================================="
+echo "Callgrind file: " $CALLGRIND_OUT
 
