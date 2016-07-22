@@ -110,3 +110,4 @@ echo $CALLGRIND_PATH callgrind.out.final $HOME"/src/modules/rlm_kafka/rlm_kafka_
 echo "==============================================="
 echo "Callgrind file: " $CALLGRIND_OUT
 
+cat callgrind.out.final
