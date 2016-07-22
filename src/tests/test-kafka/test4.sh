@@ -105,7 +105,8 @@ $PYCHECKJSON -t $FREERADIUS_PATH_TEST$JSON_CHECK_TEMPLATE -j $JSON_OUT$DEBUG
 CALLGRIND_PATH="/callgrind/callgrind_coverage/cg_coverage"
 CALLGRIND_COVERAGE="callgrind-out-4.log"
 #$CALLGRIND_PATH =/app/src/tests/test-kafka/callgrind.out.4.final $CALLGRIND_OUT $HOME"/src/modules/rlm_kafka/rlm_kafka_log.c" > $CALLGRIND_COVERAGE
-$CALLGRIND_PATH =/app/src/tests/test-kafka/callgrind.out.4.final $HOME"/src/modules/rlm_kafka/rlm_kafka_log.c" > $CALLGRIND_COVERAGE
+
+$CALLGRIND_PATH /app/src/tests/test-kafka/callgrind.out.4.final $HOME"/src/modules/rlm_kafka/rlm_kafka_log.c" > $CALLGRIND_COVERAGE
 echo "==============================================="
 echo $CALLGRIND_PATH callgrind.out.final $HOME"/src/modules/rlm_kafka/rlm_kafka_log.c"
 echo "==============================================="
