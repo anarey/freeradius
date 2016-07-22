@@ -1,6 +1,10 @@
 HOME="/app"
 FREERADIUS_PATH_TEST=$HOME"/src/tests/test-kafka/"
 
+grep -v "grep"|grep "valgrind"|awk '{print $2}'
+for i in `ps aux | grep -v "grep"|grep "valgrind"|awk '{print $2}'|uniq`; do kill -sigint $i; done
+
+
 cp $FREERADIUS_PATH_TEST/conf/radiusd-5.conf $HOME/raddb/
 cp $FREERADIUS_PATH_TEST/conf/radiusd-5.conf $HOME/raddb/
 cp $FREERADIUS_PATH_TEST/conf/kafka_log_5.conf $HOME/raddb/
