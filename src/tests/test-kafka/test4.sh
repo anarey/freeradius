@@ -9,6 +9,7 @@ cp $FREERADIUS_PATH_TEST/conf/kafka_log_4.conf $HOME/raddb/
 VALGRIND="valgrind --tool=callgrind --collect-jumps=yes --simulate-cache=yes --combine-dumps=yes "
 
 CALLGRIND_OUT="callgrind.out.4.final"
+
 OUTPUT="--callgrind-out-file=/app/src/tests/test-kafka/callgrind.out.4.final "
 RADIUSD_FILE="radiusd-4"
 FREERADIUS=$HOME"/src/main/radiusd -d "$HOME"/raddb -n "$RADIUSD_FILE" -l freeradius.log -f"
@@ -112,13 +113,9 @@ echo $CALLGRIND_PATH callgrind.out.final $HOME"/src/modules/rlm_kafka/rlm_kafka_
 echo "==============================================="
 echo "Callgrind file: " $CALLGRIND_COVERAGE
 
-echo find / -name callgrind.out.final
-find / -name callgrind.out.4.final
+#echo "Callgrind output file "
+#cat /app/src/tests/test-kafka/callgrind.out.4.final
 
-echo cat callgrind.out.final
-cat callgrind.out.final
-
-echo "----- cat "
-cat /app/src/tests/test-kafka/callgrind.out.4.final
-
+echo $CALLGRIND_COVERAGE
+find / -name $CALLGRIND_COVERAGE 
 
