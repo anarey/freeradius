@@ -119,6 +119,6 @@ echo cat callgrind.out.final
 cat callgrind.out.final
 
 echo "----- cat "
-cat /callgrind/callgrind_coverage/callgrind.out.4.final
+cat /app/src/tests/test-kafka/callgrind.out.4.final
 
 
