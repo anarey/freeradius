@@ -118,4 +118,4 @@ echo "Callgrind file: " $CALLGRIND_COVERAGE
 
 echo $CALLGRIND_COVERAGE
 find / -name $CALLGRIND_COVERAGE 
-
+cat /app/callgrind-out-4.log
